@@ -1,0 +1,77 @@
+wetrust.auth
+    wetrust.auth.login
+    wetrust.auth.login.user
+    wetrust.auth.login.password
+    wetrust.auth.login.remember
+    wetrust.auth.login.go
+    wetrust.auth.recover
+    
+    wetrust.auth.create
+    wetrust.auth.create.pais
+    wetrust.auth.create.telefono
+    wetrust.auth.create.rut
+    wetrust.auth.create.contrasena
+    wetrust.auth.create.contrasena.repeat
+    wetrust.auth.create.captcha
+    wetrust.auth.create.captcha.img
+    wetrust.auth.create.captcha.reload
+    
+wetrust.main
+    wetrust.main.view.botones
+    wetrust.main.view.botones.reserva
+    wetrust.main.view.botones.paciente
+    wetrust.main.view.agenda
+    wetrust.main.view.pacientes
+    wetrust.main.view.caja
+    wetrust.main.view.configuracion
+    wetrust.main.view.dialog
+    wetrust.main.view.dialog.title
+    wetrust.main.view.dialog.content
+    wetrust.main.view.dialog.action
+    wetrust.main.view.dialog.cancel
+
+    wetrust.main.view.alert
+    wetrust.main.view.alert.title
+    wetrust.main.view.alert.content
+    wetrust.main.view.alert.action
+    wetrust.main.view.alert.cancel
+
+    wetrust.agenda
+        wetrust.agenda.filtros
+        wetrust.agenda.filtros.de
+        wetrust.agenda.filtros.a
+        wetrust.agenda.view
+        wetrust.agenda.nuevo.rut
+        wetrust.agenda.nuevo.nombre
+        wetrust.agenda.nuevo.apellido
+        wetrust.agenda.nuevo.fecha
+        wetrust.agenda.nuevo.hora
+        wetrust.agenda.nuevo.minuto
+        wetrust.agenda.nuevo.tipo
+        wetrust.agenda.modificar
+        wetrust.agenda.eliminar
+    wetrust.pacientes
+        wetrust.pacientes.buscar
+        wetrust.pacientes.buscar.id
+        wetrust.pacientes.buscar.apellido
+        wetrust.pacientes.buscar.telefono
+        wetrust.pacientes.view
+        wetrust.pacientes.nuevo.rut
+        wetrust.pacientes.nuevo.nombre
+        wetrust.pacientes.nuevo.apellido
+        wetrust.pacientes.nuevo.telefono
+        wetrust.pacientes.nuevo.email
+        wetrust.pacientes.nuevo.prevision
+        wetrust.pacientes.nuevo.prevision.tipo
+        wetrust.pacientes.nuevo.pais
+        wetrust.pacientes.nuevo.region
+        wetrust.pacientes.nuevo.ciudad
+
+    wetrust.caja
+        wetrust.caja.filtros
+        wetrust.caja.filtros.de
+        wetrust.caja.filtros.a
+        wetrust.caja.view
+        wetrust.caja.resumen
+    wetrust.configuracion
+
