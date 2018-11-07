@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+    <title>ARZT</title>
+    <base href="http://localhost" target="_blank">
+</head>
+<body class="pt-5 bg-light">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">ARZT</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+            </ul>
+            <button class="btn btn-outline-light" id="wetrust.auth.create">Crear cuenta</button>
+        </div>
+    </nav>
+    <div class="container mt-3" id="wetrust.auth">
+        <div class="d-flex justify-content-center">
+                <div class="card align-self-center">
+                    <div class="card-header text-center">
+                        Ingresar a Plataforma
+                    </div>
+                    <div class="card-body">
+                            <div class="form-group">
+                                <label for="wetrust.auth.login.user">Número de telefono</label>
+                                <input type="number" class="form-control" id="wetrust.auth.login.user" aria-describedby="emailHelp" placeholder="56952005200">
+                                <small id="emailHelp" class="form-text text-muted">No compartimos tu número telefónico.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="wetrust.auth.login.password">Contraseña</label>
+                                <input type="password" class="form-control" id="wetrust.auth.login.password" placeholder="****">
+                            </div>
+                            <div class="form-check my-2">
+                                <input type="checkbox" class="form-check-input" id="wetrust.auth.login.remember">
+                                <label class="form-check-label" for="wetrust.auth.login.remember">Recordarme</label>
+                            </div>
+                            <button class="btn btn-outline-primary d-block mx-auto" id="wetrust.auth.login.go">Ingresar</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid mt-3 d-none" id="wetrust.main">
+        <div class="row">
+            <div class="col-2 border-right">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#wetrust.main.view.agenda" >Agenda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#wetrust.main.view.pacientes">Pacientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#wetrust.main.view.caja">Caja</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#wetrust.main.view.configuracion">Configuración</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col">
+                <ul class="nav justify-content-end" id="wetrust.main.view.botones">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="wetrust.main.view.botones.paciente">Nuevo Paciente</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="wetrust.main.view.botones.reserva">Nueva Reserva</a>
+                    </li>
+                </ul>
+                <div class="card my-2" id="wetrust.agenda.filtros">
+                    <div class="card-body">
+                        <h5 class="card-title">Fecha</h5>
+                        <div class="form-row">
+                            <div class="col">
+                              <p class="m-0">Desde</p>
+                              <input type="date" class="form-control" id="wetrust.agenda.filtros.de">
+                            </div>
+                            <div class="col">
+                                <p class="m-0">Hasta</p>
+                              <input type="date" class="form-control" id="wetrust.agenda.filtros.a">
+                            </div>
+                          </div>
+                    </div>
+                </div>
+                <div class="card my-2" id="wetrust.agenda.view">
+                    <div class="card-body">
+                        <h5 class="card-title">Pacientes Agendados</h5>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Día</th>
+                                        <th scope="col">Hora</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Apellido</th>
+                                        <th scope="col">Ciudad</th>
+                                        <th scope="col">Motivo</th>
+                                        <th scope="col">Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                        <td>@mdo</td>
+                                        <td>@mdo</td>
+                                        <td>@mdo</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Jacob</td>
+                                        <td>Thornton</td>
+                                        <td>@fat</td>
+                                        <td>@fat</td>
+                                        <td>@fat</td>
+                                        <td>@fat</td>
+                                        <td>@fat</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                        <td>@twitter</td>
+                                        <td>@twitter</td>
+                                        <td>@twitter</td>
+                                        <td>@twitter</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card my-2 d-none" id="wetrust.pacientes.buscar">
+                    <div class="card-body">
+                        <h5 class="card-title">Buscar Paciente</h5>
+                        <div class="form-row">
+                            <div class="col">
+                              <p class="m-0">ID</p>
+                              <input type="text" class="form-control" id="wetrust.pacientes.buscar.id">
+                            </div>
+                            <div class="col">
+                                <p class="m-0">Apellido</p>
+                              <input type="text" class="form-control" id="wetrust.pacientes.buscar.apellido">
+                            </div>
+                            <div class="col">
+                                <p class="m-0">Telefono</p>
+                              <input type="number" class="form-control" id="wetrust.pacientes.buscar.telefono">
+                            </div>
+                          </div>
+                    </div>
+                </div>
+                <div class="card my-2 d-none" id="wetrust.pacientes.view">
+                    <div class="card-body">
+                        <h5 class="card-title">Pacientes</h5>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">First</th>
+                                        <th scope="col">Last</th>
+                                        <th scope="col">Handle</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Jacob</td>
+                                        <td>Thornton</td>
+                                        <td>@fat</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card my-2 d-none" id="wetrust.caja.filtros">
+                    <div class="card-body">
+                        <h5 class="card-title">Filtros</h5>
+                        <div class="form-row">
+                            <div class="col">
+                              <p class="m-0">Desde</p>
+                              <input type="date" class="form-control" id="wetrust.caja.filtros.de">
+                            </div>
+                            <div class="col">
+                                <p class="m-0">Hasta</p>
+                              <input type="date" class="form-control" id="wetrust.caja.filtros.a">
+                            </div>
+                          </div>
+                        <div class="form-row">
+                            <div class="col">
+                              <p class="m-0">Tipo de pago</p>
+                              <input type="text" class="form-control">
+                            </div>
+                            <div class="col">
+                                <p class="m-0">Tipo de pago</p>
+                              <input type="text" class="form-control">
+                            </div>
+                            <div class="col">
+                                <p class="m-0">Tipo de pago</p>
+                              <input type="number" class="form-control">
+                            </div>
+                          </div>
+                    </div>
+                </div>
+                <div class="card my-2 d-none" id="wetrust.caja.view">
+                    <div class="card-body">
+                        <h5 class="card-title">Flujos de Dinero</h5>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">First</th>
+                                        <th scope="col">Last</th>
+                                        <th scope="col">Handle</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Jacob</td>
+                                        <td>Thornton</td>
+                                        <td>@fat</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card my-2 d-none" id="wetrust.caja.resumen">
+                    <div class="card-body">
+                        <h5 class="card-title">Resumen</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" role="dialog" id="wetrust.main.view.dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="wetrust.main.view.dialog.title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body" id="wetrust.main.view.dialog.content">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="wetrust.main.view.dialog.action">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="wetrust.main.view.dialog.cancel">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" role="dialog" id="wetrust.main.view.alert">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="wetrust.main.view.alert.title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body" id="wetrust.main.view.alert.content">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="wetrust.main.view.alert.action">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="wetrust.main.view.alert.cancel">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/snackbarjs/1.1.0/snackbar.min.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() { $('body').bootstrapMaterialDesign(); });
+        var app = {
+            initialize: function(){
+                let ln = x=window.navigator.language||navigator.browserLanguage; 
+                ln = ln.substring(0,2);
+                this.language = ln.toUpperCase();
+                if (cacheApp.check() === true){
+                    this.cache = true;
+                    cacheApp.make()
+                }
+                static.country();
+                this.login();
+            },
+            login : function(){
+                $.get( configuracion.login).done(function( response ) {
+                    if (response.result == true){
+                        app.auth(false);
+                    }else{
+                        configuracion.auth = response.data.login;
+                        configuracion.create = response.data.create;
+                        textos.process('auth');
+                    }
+                }).fail(function(jqXHR, textStatus){ textos.process(textStatus);});
+            },
+            auth : function(human){
+                if (human){
+                    let data = {
+                        user_phone: $('#wetrust\\.auth\\.login\\.user').val(),
+                        user_key: $('#wetrust\\.auth\\.login\\.password').val(),
+                    }
+                    $.post( configuracion.auth, data).done(function( response ) {
+                        if (response.result == true){
+                            $('#wetrust\\.auth').addClass('d-none');
+                            $('#wetrust\\.main').removeClass('d-none'); 
+                        }else{
+                            textos.process('auth');
+                        }
+                    }).fail(function(jqXHR, textStatus){ textos.process(textStatus);});
+                }
+                else{
+                    $('#wetrust\\.auth').addClass('d-none');
+                    $('#wetrust\\.main').removeClass('d-none'); 
+                }
+            },
+            newUser: function(){
+                $('#wetrust\\.main\\.view\\.dialog\\.title').html('Nueva cuenta');
+                $('#wetrust\\.main\\.view\\.dialog\\.content').html('<div class="alert alert-danger" role="alert">Actualmente solo disponible en Chile</div><div class="form-row my-3"> <div class="col"> <label for="wetrust.auth.create.pais" class="text-primary">Pais</label> <select class="form-control" id="wetrust.auth.create.pais"> <option value="38">Chile</option> </select> </div></div><div class="form-row my-3"> <div class="col"> <label for="wetrust.auth.create.telefono" class="text-primary">Teléfono</label> <div class="input-group mb-2 mr-sm-2"> <div class="input-group-prepend"> <div class="input-group-text">+56</div></div><input class="form-control" id="wetrust.auth.create.telefono" type="tel" pattern="[0-9]{9}" aria-describedby="telefonoCreateHelp"> </div><small id="telefonoCreateHelp" class="form-text text-muted">9 digitos.</small> </div><div class="col"> <label for="wetrust.auth.create.rut" class="text-primary">RUT</label> <div class="input-group mb-2 mr-sm-2"> <div class="input-group-prepend"> <div class="input-group-text">&nbsp;</div></div><input class="form-control" id="wetrust.auth.create.rut" type="text" aria-describedby="rutCreateHelp"> </div><small id="rutCreateHelp" class="form-text text-muted">sin puntos y sin guión.</small> </div></div><div class="form-row my-3"> <div class="col"><label for="wetrust.auth.create.contrasena" class="text-primary">Contraseña</label><input class="form-control" id="wetrust.auth.create.contrasena" type="password" aria-describedby="contrasenaCreateHelp"><small id="contrasenaCreateHelp" class="form-text text-muted">Mínimo 6 carácteres.</small></div><div class="col"><label for="wetrust.auth.create.contrasena.repeat" class="text-primary">Repetir contraseña</label><input class="form-control" id="wetrust.auth.create.contrasena.repeat" type="password" aria-describedby="contrasenaRepeatCreateHelp"><small id="contrasenaRepeatCreateHelp" class="form-text text-muted">Repita la contraseña.</small></div></div><div class="form-row my-3"> <div class="col"><img alt="captcha" class="img-thumbnail" src="" id="wetrust.auth.create.captcha.img"><a href="#" class="d-block text-center" id="wetrust.auth.create.captcha.reload">Cambiar imágen</a></div><div class="col"> <label class="text-primary" for="wetrust.auth.create.catcha">Captcha</label> <input class="form-control" id="wetrust.auth.create.captcha" aria-describedby="captchaCreateHelp" type="text"> <small class="form-text text-muted" id="captchaCreateHelp">Escriba los carácteres de la imagen</small></div></div>');
+                $('#wetrust\\.auth\\.create\\.captcha\\.img').attr('src', configuracion.captcha);
+                $('#wetrust\\.auth\\.create\\.captcha\\.reload').on("click", function(){
+                    $('#wetrust\\.auth\\.create\\.captcha\\.img').attr("src", configuracion.captcha + '?' + Math.random());
+                    return false;
+                });
+                $('#wetrust\\.auth\\.create\\.rut').on('keyup', function(){ funciones.validarRUT($(this).val(), 'wetrust\\.auth\\.create\\.rut');});
+                $('#wetrust\\.main\\.view\\.dialog\\.cancel').html('Cancelar');
+                $('#wetrust\\.main\\.view\\.dialog\\.action').on('click', function(){
+                    //verificar si todos los input tienen datos
+                    let data = {
+                        user_country: $('#wetrust\\.auth\\.create\\.pais').val(),
+                        user_phone: $('#wetrust\\.auth\\.create\\.telefono').val(),
+                        user_dni: $('#wetrust\\.auth\\.create\\.rut').val(),
+                        user_password: $('#wetrust\\.auth\\.create\\.contrasena').val(),
+                        user_password_repeat: $('#wetrust\\.auth\\.create\\.contrasena\\.repeat').val(),
+                        user_captcha: $('#wetrust\\.auth\\.create\\.captcha').val()
+                    }
+
+                    if (data.user_phone === '' || data.user_phone.length < 9 || data.user_phone.length > 9){
+                        $.snackbar({content: textos.process('user_phone', true), style: 'toast', timeout: 5000});
+                    }else if (data.user_dni === '' || $('#wetrust\\.auth\\.create\\.rut')[0].checkValidity() !== true){
+                        $.snackbar({content: textos.process('user_dni', true), style: 'toast', timeout: 5000});
+                    }else if (data.user_password === '' || data.user_password.length < 6 || data.user_password.length > 20){
+                        $.snackbar({content: textos.process('user_password', true), style: 'toast', timeout: 5000});
+                    }else if (data.user_password_repeat === '' || data.user_password_repeat.length < 6 || data.user_password_repeat.length > 20){
+                        $.snackbar({content: textos.process('user_password_repeat', true), style: 'toast', timeout: 5000});
+                    }else if (data.user_password !== data.user_password_repeat){
+                        $.snackbar({content: textos.process('user_password_repeat_error', true), style: 'toast', timeout: 5000});
+                    }else if (data.user_captcha === ''){
+                        $.snackbar({content: textos.process('user_captcha_error', true), style: 'toast', timeout: 5000});
+                    }
+                    else{
+                        $.post( configuracion.create, data).done(function( result ) {
+                            if (result.result === true){
+                                $.snackbar({content: textos.process('user_register_ok', true), style: 'toast', timeout: 5000});
+                                $('#wetrust\\.main\\.view\\.dialog').modal('hide');
+                            }
+                            else{
+                                $.snackbar({content: result.data.message, style: 'toast', timeout: 5000});
+                            }
+                        }).fail(function(jqXHR, textStatus){ textos.process(textStatus);});
+                    }
+                }).html('Crear');
+                //mostrar dialogo
+                $('#wetrust\\.main\\.view\\.dialog').modal('show');
+            },
+            newPacienteDialog: function(){
+                //contruir vista
+                $('#wetrust\\.main\\.view\\.dialog\\.title').html('Nuevo Paciente');
+                $('#wetrust\\.main\\.view\\.dialog\\.content').html('<div class="form-row my-3"><div class="col-6"><label for="wetrust.pacientes.nuevo.rut">RUT</label><input type="text" class="form-control" id="wetrust.pacientes.nuevo.rut"></div></div><div class="form-row my-3"><div class="col"><label for="exampleInputEmail1" id="wetrust.pacientes.nuevo.nombre">Nombre</label><input type="text" class="form-control" id="wetrust.pacientes.nuevo.nombre"></div><div class="col"><label for="wetrust.pacientes.nuevo.apellido">Apellido</label><input type="text" class="form-control" id="wetrust.pacientes.nuevo.apellido"></div></div><div class="form-row my-3"><div class="col"><label for="wetrust.pacientes.nuevo.telefono">Teléfono</label><input type="number" class="form-control" id="wetrust.pacientes.nuevo.telefono"></div><div class="col"><label for="wetrust.pacientes.nuevo.email">Email</label><input type="email" class="form-control" id="wetrust.pacientes.nuevo.email"></div></div><div class="form-row my-3"><div class="col"><label for="wetrust.pacientes.nuevo.pais">Pais</label><select class="form-control" id="wetrust.pacientes.nuevo.pais"></select></div></div><div class="form-row my-3"><div class="col"><label for="wetrust.pacientes.nuevo.region">Region</label><select class="form-control" id="wetrust.pacientes.nuevo.region"></select></div><div class="col"><label for="wetrust.pacientes.nuevo.ciudad">Ciudad</label><select class="form-control" id="wetrust.pacientes.nuevo.ciudad"></select></div></div><div class="form-row my-3"><div class="col"><label for="wetrust.pacientes.nuevo.prevision">Previsión</label><select class="form-control" id="wetrust.pacientes.nuevo.prevision"></select></div><div class="col"><label for="wetrust.pacientes.nuevo.prevision.tipo">Categoria/Institución</label><select class="form-control" id="wetrust.pacientes.nuevo.prevision.tipo"></select></div></div>');
+                $('#wetrust\\.main\\.view\\.dialog\\.cancel').html('Cancelar');
+
+                //incorporar datos
+                $.each(static.countryData, function(i,val){
+                    let option = '<option value="' + val.country_id + '">' + val.country + '</option>';
+                    $('#wetrust\\.pacientes\\.nuevo\\.pais').append(option);
+                });
+
+                //activar funciones para elementos
+                $('#wetrust\\.pacientes\\.nuevo\\.prevision').on('click', function(){ static.healthCategory('/'+$(this).val());});
+                $('#wetrust\\.pacientes\\.nuevo\\.pais').on('click', function(){ static.health('/'+$(this).val()); static.states('/'+$(this).val());});
+                $('#wetrust\\.pacientes\\.nuevo\\.region').on('click', function(){ static.cities('/'+$(this).val());});
+                $('#wetrust\\.pacientes\\.nuevo\\.rut').on('keyup', function(){ funciones.validarRUT($(this).val(), 'wetrust\\.pacientes\\.nuevo\\.rut');});
+                $('#wetrust\\.main\\.view\\.dialog\\.action').on('click', function(){
+                    $('#wetrust\\.main\\.view\\.dialog').modal('hide');
+                }).html('Guardar');
+                //mostrar dialogo
+                $('#wetrust\\.main\\.view\\.dialog').modal('show');
+            },
+            newReservaDialog: function(){
+                $('#wetrust\\.main\\.view\\.dialog\\.title').html('Nuevo Reserva');
+                $('#wetrust\\.main\\.view\\.dialog\\.content').html('<div class="form-row my-3"><div class="col-6"><label for="wetrust.agenda.nuevo.rut">RUT</label><input type="text" class="form-control" id="wetrust.agenda.nuevo.rut"></div></div><div class="form-row my-3"><div class="col"><label for="wetrust.agenda.nuevo.nombre">Nombre</label><input type="text" class="form-control" id="wetrust.agenda.nuevo.nombre"></div><div class="col"><label for="wetrust.agenda.nuevo.apellido">Apellido</label><input type="text" class="form-control" id="wetrust.agenda.nuevo.apellido"></div></div><div class="form-row my-3"><div class="col"><label for="wetrust.agenda.nuevo.tipo">Tipo de atención</label><select class="form-control" id="wetrust.agenda.nuevo.tipo"></select></div></div><div class="form-row my-3"><div class="col"><label for="wetrust.agenda.nuevo.fecha">Fecha</label><input type="date" class="form-control" id="wetrust.agenda.nuevo.fecha"></div></div><div class="form-row my-3"><div class="col"><label for="wetrust.agenda.nuevo.hora">Hora</label><select class="form-control" id="wetrust.agenda.nuevo.hora"></select></div><div class="col"><label for="wetrust.agenda.nuevo.minuto">Minutos</label><select class="form-control" id="wetrust.agenda.nuevo.minuto"></select></div></div>');
+                $('#wetrust\\.agenda\\.nuevo\\.rut').on('keyup', function(){ funciones.validarRUT($(this).val(), 'wetrust\\.agenda\\.nuevo\\.rut');});
+                $('#wetrust\\.main\\.view\\.dialog\\.action').on('click', function(){
+                    $('#wetrust\\.main\\.view\\.dialog').modal('hide');
+                }).html('Guardar');
+                $('#wetrust\\.main\\.view\\.dialog\\.cancel').html('Cancelar'); 
+                $('#wetrust\\.main\\.view\\.dialog').modal('show');
+            },
+            getDate: function(){
+                let fecha = new Date();
+                let day = ('0' + fecha.getDate()).slice(-2);
+                let month = ('0' + (fecha.getMonth() + 1)).slice(-2);
+                return  fecha.getFullYear() + '-' + month  + '-' + day;
+            },
+            setView: function(view){
+                this.setHide();
+                if (view == 'agenda'){
+                    $('#wetrust\\.main\\.view\\.botones').removeClass('d-none');
+                    $('#wetrust\\.agenda\\.filtros').removeClass('d-none');
+                    $('#wetrust\\.agenda\\.view').removeClass('d-none');
+                    $('#wetrust\\.main\\.view\\.botones\\.reserva').removeClass('d-none');
+                }
+                else if (view == 'pacientes'){
+                    $('#wetrust\\.main\\.view\\.botones').removeClass('d-none');
+                    $('#wetrust\\.pacientes\\.buscar').removeClass('d-none');
+                    $('#wetrust\\.pacientes\\.view').removeClass('d-none');
+                }
+                else if (view == 'caja'){
+                    $('#wetrust\\.caja\\.filtros').removeClass('d-none');
+                    $('#wetrust\\.caja\\.view').removeClass('d-none');
+                    $('#wetrust\\.caja\\.resumen').removeClass('d-none');
+                }
+                else if (view == 'configuracion'){
+                    $('#wetrust\\.main\\.view\\.agenda').removeClass('d-none');
+                    $('#wetrust\\.main\\.view\\.agenda').removeClass('d-none');
+                }
+            },
+            setHide: function(){
+                $('#wetrust\\.main\\.view\\.botones').addClass('d-none');
+                $('#wetrust\\.main\\.view\\.botones\\.reserva').addClass('d-none');
+                $('#wetrust\\.agenda\\.filtros').addClass('d-none');
+                $('#wetrust\\.agenda\\.view').addClass('d-none');
+                $('#wetrust\\.pacientes\\.buscar').addClass('d-none');
+                $('#wetrust\\.pacientes\\.view').addClass('d-none');
+                $('#wetrust\\.caja\\.filtros').addClass('d-none');
+                $('#wetrust\\.caja\\.view').addClass('d-none');
+                $('#wetrust\\.caja\\.resumen').addClass('d-none');
+            },
+            onHashChange: function(){
+                let hash = document.location.hash;
+                if (hash == '#wetrust.main.view.agenda') { this.setView('agenda');}
+                else if (hash == '#wetrust.main.view.pacientes') { this.setView('pacientes');}
+                else if (hash == '#wetrust.main.view.caja') { this.setView('caja');}
+                else if (hash == '#wetrust.main.view.configuracion') { this.setView('configuracion');}
+            },
+            language: 'EN',
+            country: '38',
+            cache: false
+        };
+
+        var static = {
+            countryData: '',
+            stateData: '',
+            citiesData: '',
+            healthData: '',
+            healthCategoryData: '',
+            tokenData: '',
+            health: function(countryID){
+                $.get( configuracion.health + app.language + countryID).done(function( data ) {
+                    static.healthData =  data;static.healthProcess();
+                }).fail(function(jqXHR, textStatus){ textos.process(textStatus);});
+            },
+            healthCategory: function(healthID){
+                $.get( configuracion.healthCategory + app.language + healthID).done(function( data ) {
+                    static.healthCategoryData =  data;static.healthCategoryProcess();
+                }).fail(function(jqXHR, textStatus){ textos.process(textStatus);});
+            },
+            country: function(){
+                if (app.cache === true){
+                    var countries = cacheApp.get('countries');
+                    if (Object.keys(countries).length == 0){this.getCountry();}
+                    else{this.countryData = countries;}
+                }
+                else{this.getCountry();}
+            },
+            states: function(countryID){
+                $.get( configuracion.state + app.language + countryID).done(function( data ) {
+                    static.stateData =  data;static.stateProcess();
+                }).fail(function(jqXHR, textStatus){ textos.process(textStatus);});
+            },
+            cities: function(statesID){
+                $.get( configuracion.city + app.language + statesID).done(function( data ) {
+                    static.citiesData =  data;static.citiesProcess();
+                }).fail(function(jqXHR, textStatus){ textos.process(textStatus);});
+            },
+            getCountry: function(){
+                $.get( configuracion.country + app.language).done(function( data ) {
+                    static.countryData =  data;
+                    if (app.cache === true){
+                        var success = cacheApp.set('countries', data);
+                        if (success === false){app.cache = false};
+                    }
+                }).fail(function(jqXHR, textStatus){ textos.process(textStatus);});
+            },
+            token: function(){
+                $.get( configuracion.token).done(function( result ) {
+                    static.tokenData =  result.data.token;
+                }).fail(function(jqXHR, textStatus){ textos.process(textStatus);});
+            },
+            healthProcess: function(){
+                $('#wetrust\\.pacientes\\.nuevo\\.prevision').empty();
+                $.each(static.healthData, function(i,val){
+                    let option = '<option value="' + val.health_id + '">' + val.health + '</option>';
+                    $('#wetrust\\.pacientes\\.nuevo\\.prevision').append(option);
+                });
+            },
+            healthCategoryProcess : function(){
+                $('#wetrust\\.pacientes\\.nuevo\\.prevision\\.tipo').empty();
+                $.each(static.healthCategoryData, function(i,val){
+                    let option = '<option value="' + val.health_category_id + '">' + val.health_category + '</option>';
+                    $('#wetrust\\.pacientes\\.nuevo\\.prevision\\.tipo').append(option);
+                });
+            },
+            stateProcess : function(){
+                $('#wetrust\\.pacientes\\.nuevo\\.region').empty();
+                $.each(static.stateData, function(i,val){
+                    let option = '<option value="' + val.state_id + '">' + val.state + '</option>';
+                    $('#wetrust\\.pacientes\\.nuevo\\.region').append(option);
+                });
+            },
+            citiesProcess : function(){
+                $('#wetrust\\.pacientes\\.nuevo\\.ciudad').empty();
+                $.each(static.citiesData, function(i,val){
+                    let option = '<option value="' + val.city_id + '">' + val.city + '</option>';
+                    $('#wetrust\\.pacientes\\.nuevo\\.ciudad').append(option);
+                });
+            }
+        }
+
+        var configuracion = {
+            url: 'http://localhost/',
+            //url: "https://" + location.hostname,
+            login: 'login/connect',
+            auth: '',
+            create: '',
+            country: 'open/country/',
+            state: 'open/state/',
+            city: 'open/city/',
+            health: 'open/health/',
+            healthCategory: 'open/health_category/',
+            token: 'open/token',
+            captcha: 'login/captcha'
+        }
+
+        var textos = {
+            timeout_es: 'Tu conexión a Internet es muy lenta o nuestro servidor está sobrecargado. Si el problema persiste, comunicate al 5685',
+            timeout_en: 'Your Internet connection is very slow or our server is overloaded. If the problem persists, contact 5685',
+            xhr_es: 'Tu conexión a Internet es inestable, vuelve a cargar la plataforma. Si el problema persiste, favor comunicate al 5685',
+            xhr_en: 'Your Internet connection is unstable, reload the platform. If the problem persists, please contact 5685',
+            auth_es: 'Debes presentar tus credeciales',
+            auth_en: 'You must present your credentials',
+            user_phone_es: 'Ingrese un número telefónico válido',
+            user_phone_en: 'Enter a valid phone number',
+            user_dni_es: 'El RUT es inválido',
+            user_dni_en: 'Enter a valid DNI',
+            user_password_es: 'Su contraseña es menor a 6 o mayor a 20 carácteres',
+            user_password_en: 'Your password is less than 6 or greater than 20 characters',
+            user_password_repeat_es: 'Repita su contraseña',
+            user_password_repeat_en: 'Repeat your password',
+            user_password_repeat_error_es: 'Las contraseñas no coinciden',
+            user_password_repeat_error_en: 'Passwords do not match',
+            user_captcha_es: 'Ingrese los carácteres del captcha',
+            user_captcha_en: 'Enter the characters of the captcha',
+            user_register_ok_es: 'Registro exitoso, ahora puede ingresar a la plataforma',
+            user_register_ok_en: 'Successful registration, you can now enter the platform',
+            timeoutError: function(){
+                return app.language == 'ES' ? this.timeout_es : this.timeout_en;
+            },
+            xhrError: function(){
+                return app.language == 'ES' ? this.xhr_es : this.xhr_en;
+            },
+            authError: function(){
+                return app.language == 'ES' ? this.auth_es : this.auth_en;
+            },
+            process: function(textStatus, others = false){
+                if (others){
+                    return app.language == 'ES' ? this[textStatus + '_es'] : this[textStatus + '_en'];
+                }
+                else{
+                    if (textStatus == 'timeout')
+                    $.snackbar({content: textos.timeoutError(), style: 'toast', timeout: 5000});
+                    if (textStatus == 'error')
+                    $.snackbar({content: textos.xhrError(), style: 'toast', timeout: 5000});
+                    if (textStatus == 'auth')
+                    $.snackbar({content: textos.authError(), style: 'toast', timeout: 5000});
+                }
+            }
+        }
+
+        var cacheApp ={
+            get: function(element){
+                let data = localStorage.getItem(element);
+
+                if (data == null){
+                    return {};
+                }
+                else{
+                    return JSON.parse(localStorage.getItem(element));
+                }
+            },
+            set: function(key,element){
+                try {
+                    localStorage.setItem(key,JSON.stringify(element));
+                    return true;
+                } catch(e) {
+                    return false;
+                }
+            },
+            make: function(){
+                if (localStorage.getItem('countries') === null){
+                    localStorage.setItem('countries', '{}');
+                    return true;
+                }
+                return false;
+            },
+            check: function(){
+                var test = 'test';
+                try {
+                    localStorage.setItem(test, test);
+                    localStorage.removeItem(test);
+                    return true;
+                } catch(e) {
+                    return false;
+                }
+            }
+        }
+
+        var funciones = {
+            validarRUT: function (rut, input) {
+                // Despejar Puntos
+                rut = rut.replace(/[.-]/g, '');
+                // Aislar Cuerpo y Dígito Verificador
+                cuerpo = rut.slice(0,-1);
+                dv = rut.slice(-1).toUpperCase();
+                // Formatear RUN
+                $('#'+ input).val(cuerpo + '-'+ dv);
+                // Si no cumple con el mínimo ej. (n.nnn.nnn)
+                if(cuerpo.length < 7) { $('#'+ input)[0].setCustomValidity('RUT Incompleto'); return false;}
+                // Calcular Dígito Verificador
+                suma = 0;
+                multiplo = 2;
+                // Para cada dígito del Cuerpo
+                for(i=1;i<=cuerpo.length;i++) {
+                    // Obtener su Producto con el Múltiplo Correspondiente
+                    index = multiplo * rut.charAt(cuerpo.length - i); 
+                    // Sumar al Contador General
+                    suma = suma + index;
+                    // Consolidar Múltiplo dentro del rango [2,7]
+                    if(multiplo < 7) { multiplo = multiplo + 1; } else { multiplo = 2; }
+                }
+                // Calcular Dígito Verificador en base al Módulo 11
+                dvEsperado = 11 - (suma % 11);
+                // Casos Especiales (0 y K)
+                dv = (dv == 'K')?10:dv;
+                dv = (dv == 0)?11:dv;
+                // Validar que el Cuerpo coincide con su Dígito Verificador
+                if(dvEsperado != dv) { $('#'+ input)[0].setCustomValidity('RUT Inválido'); return false; } 
+                // Si todo sale bien, eliminar errores (decretar que es válido)
+                $('#'+ input)[0].setCustomValidity('');
+                return true;
+            },
+            validarNumber: function (rut, input) {
+                // Despejar Puntos
+                rut = rut.replace(/[.-]/g, '');
+                // Aislar Cuerpo y Dígito Verificador
+                cuerpo = rut.slice(0,-1);
+                dv = rut.slice(-1).toUpperCase();
+                // Formatear RUN
+                $('#'+ input).val(cuerpo + '-'+ dv);
+                // Si no cumple con el mínimo ej. (n.nnn.nnn)
+                if(cuerpo.length < 7) { $('#'+ input)[0].setCustomValidity('RUT Incompleto'); return false;}
+                // Calcular Dígito Verificador
+                suma = 0;
+                multiplo = 2;
+                // Para cada dígito del Cuerpo
+                for(i=1;i<=cuerpo.length;i++) {
+                    // Obtener su Producto con el Múltiplo Correspondiente
+                    index = multiplo * rut.charAt(cuerpo.length - i); 
+                    // Sumar al Contador General
+                    suma = suma + index;
+                    // Consolidar Múltiplo dentro del rango [2,7]
+                    if(multiplo < 7) { multiplo = multiplo + 1; } else { multiplo = 2; }
+                }
+                // Calcular Dígito Verificador en base al Módulo 11
+                dvEsperado = 11 - (suma % 11);
+                // Casos Especiales (0 y K)
+                dv = (dv == 'K')?10:dv;
+                dv = (dv == 0)?11:dv;
+                // Validar que el Cuerpo coincide con su Dígito Verificador
+                if(dvEsperado != dv) { $('#'+ input)[0].setCustomValidity('RUT Inválido'); return false; } 
+                // Si todo sale bien, eliminar errores (decretar que es válido)
+                $('#'+ input)[0].setCustomValidity('');
+                return true;
+            }
+        }
+
+
+        $(document).ready(function(){
+            app.initialize();
+            $('#wetrust\\.auth\\.login\\.go').on('click', function(){ app.auth(true);});
+            $('#wetrust\\.agenda\\.filtros\\.de').val(app.getDate());
+            $('#wetrust\\.agenda\\.filtros\\.a').val(app.getDate());
+            $('#wetrust\\.caja\\.filtros\\.de').val(app.getDate());
+            $('#wetrust\\.caja\\.filtros\\.a').val(app.getDate());
+            $('#wetrust\\.main\\.view\\.botones\\.paciente').on('click', function(){app.newPacienteDialog();});
+            $('#wetrust\\.main\\.view\\.botones\\.reserva').on('click', function(){app.newReservaDialog();});
+            $('#wetrust\\.pacientes\\.buscar\\.id').on('keyup', function(){ funciones.validarRUT($(this).val(), 'wetrust\\.pacientes\\.buscar\\.id');});
+            $('#wetrust\\.auth\\.create').on('click', function(){app.newUser();});
+            $(window).on('hashchange', function() {app.onHashChange();});
+        });
+    </script>
+</body>
+
+</html>
